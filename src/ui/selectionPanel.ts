@@ -2,6 +2,7 @@ import { Application, Container, Graphics, Text } from 'pixi.js';
 import { Button } from './button';
 import type { Game } from '../engine/game';
 import { PAWN_ACTIONS, type PawnAction } from '../engine/actions';
+import { LOW_NEED_THRESHOLD } from '../engine/needs';
 
 const PANEL_BG = 0x1f1a15;
 const PANEL_BORDER = 0x3e3428;
@@ -127,6 +128,8 @@ export class SelectionPanel {
     const conditions: Array<[string, number]> = [];
     if (sel.restrained) conditions.push(['Restrained in chains', RESTRAINED_TEXT]);
     if (sel.agitated) conditions.push(['Agitated', AGITATED_TEXT]);
+    if (sel.needs.food < LOW_NEED_THRESHOLD) conditions.push(['Hungry', AGITATED_TEXT]);
+    if (sel.needs.rest < LOW_NEED_THRESHOLD) conditions.push(['Exhausted', AGITATED_TEXT]);
     if (conditions.length === 0) {
       this.condition.text = 'Calm';
       this.condition.style.fill = MUTED;

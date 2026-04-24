@@ -132,7 +132,7 @@ export class Game {
   feedAndBathe(pawn: Pawn, cost: number): boolean {
     if (this._budget < cost) return false;
     this._budget -= cost;
-    pawn.applyBoost(50, 30, 6);
+    pawn.applyBoost(70, 55, 10);
     this.emitChange();
     return true;
   }
