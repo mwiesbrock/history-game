@@ -73,6 +73,38 @@ async function boot() {
   countdown.position.set(14, 82);
   hud.addChild(countdown);
 
+  const pauseHint = new Text({
+    text: 'Space to pause',
+    style: {
+      fill: MUTED_COLOR,
+      fontSize: 11,
+      fontFamily: 'Georgia, serif',
+      fontStyle: 'italic',
+    },
+  });
+  pauseHint.position.set(14, 102);
+  hud.addChild(pauseHint);
+
+  const pausedBadge = new Text({
+    text: 'PAUSED',
+    style: {
+      fill: 0xf0d690,
+      fontSize: 14,
+      fontFamily: 'Georgia, serif',
+      fontWeight: 'bold',
+    },
+  });
+  pausedBadge.position.set(14, 102);
+  pausedBadge.visible = false;
+  hud.addChild(pausedBadge);
+
+  window.addEventListener('keydown', (e) => {
+    if (e.code === 'Space' && !e.repeat) {
+      e.preventDefault();
+      game.togglePause();
+    }
+  });
+
   const statsBar = new StatsBar(app, game);
   hud.addChild(statsBar.container);
 
@@ -128,6 +160,10 @@ async function boot() {
       remaining > 0
         ? `Miss Dix arrives in ${remaining} day${remaining === 1 ? '' : 's'}.`
         : 'Miss Dix has arrived.';
+
+    const paused = game.clock.paused;
+    pausedBadge.visible = paused;
+    pauseHint.visible = !paused;
 
     if (game.clock.ended && !endBanner.visible) {
       endBanner.visible = true;

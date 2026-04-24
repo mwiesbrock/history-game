@@ -6,9 +6,9 @@ import type { RoomType } from '../maps/types';
 import { makeNeeds, tickNeedsForPawn, NEED_MAX, type Needs, type NeedContext } from './needs';
 
 export const TILE_SIZE = 48;
-const WALK_SPEED = 2.2;
-const IDLE_TIME_MIN = 1.2;
-const IDLE_TIME_MAX = 3.2;
+const WALK_SPEED = 1.3;
+const IDLE_TIME_MIN = 2.0;
+const IDLE_TIME_MAX = 5.0;
 
 const BAR_W = 34;
 const BAR_H = 4;
@@ -73,7 +73,7 @@ export class Pawn {
     this.container.eventMode = 'static';
     this.container.cursor = 'pointer';
     this.container.hitArea = {
-      contains: (px: number, py: number) => px >= -10 && px <= 10 && py >= -16 && py <= 8,
+      contains: (px: number, py: number) => px >= -18 && px <= 18 && py >= -22 && py <= 14,
     };
 
     this.selectionRing = new Graphics();

@@ -64,9 +64,9 @@ export class Game {
       const dayFraction = dt / SECONDS_PER_DAY;
       const clockActive = !this.clock.paused && !this.clock.ended;
 
-      for (const pawn of this.pawns) {
-        pawn.update(dt, this.map, (p) => this.wander(p));
-        if (clockActive) {
+      if (clockActive) {
+        for (const pawn of this.pawns) {
+          pawn.update(dt, this.map, (p) => this.wander(p));
           const tile = this.map.get(pawn.tileX, pawn.tileY);
           pawn.tickNeeds(dayFraction, tile.roomType, {
             attendants: this._attendants,
@@ -74,9 +74,9 @@ export class Game {
             agitated: pawn.agitated,
           });
         }
+        this.pawnLayer.children.sort((a, b) => a.position.y - b.position.y);
+        this.emitChange();
       }
-      this.pawnLayer.children.sort((a, b) => a.position.y - b.position.y);
-      if (clockActive) this.emitChange();
     });
 
     this.recenter();
@@ -97,6 +97,13 @@ export class Game {
 
   get selected(): Pawn | null {
     return this._selected;
+  }
+
+  togglePause(): void {
+    if (this.clock.ended) return;
+    if (this.clock.paused) this.clock.resume();
+    else this.clock.pause();
+    this.emitChange();
   }
 
   onChange(fn: GameListener): () => void {
