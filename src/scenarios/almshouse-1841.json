@@ -1,0 +1,19 @@
+{
+  "id": "almshouse-1841",
+  "title": "The Almshouse",
+  "year": 1841,
+  "location": "East Cambridge, Massachusetts",
+  "introText": "March 1841. You have been appointed keeper of the town almshouse. Among the paupers, orphans, and infirm you will find men and women the town calls 'lunatics' — some kept in cages or chains in the cellar. A schoolteacher named Miss Dix is touring such institutions across the Commonwealth. She has asked to visit in thirty days.",
+  "epilogueText": {
+    "damning": "Miss Dix's report to the Legislature named your almshouse among those she called 'a spectacle of suffering.' The town selectmen replaced you within the month.",
+    "mixed": "Miss Dix's report acknowledged improvement but noted the work was only half begun. Your appointment was renewed, conditionally.",
+    "commendation": "Miss Dix praised the almshouse as an example to neighboring towns. Her 1843 Memorial to the Legislature would cite such reforms as proof that humane care was possible."
+  },
+  "startingBudget": 500,
+  "durationDays": 30,
+  "map": "almshouse-small",
+  "startingPatients": [],
+  "availableActions": [],
+  "inspector": "dix",
+  "quoteBank": []
+}
